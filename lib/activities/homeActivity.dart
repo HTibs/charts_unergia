@@ -23,6 +23,9 @@ class _HomeActivityState extends State<HomeActivity> {
             ),
             RaisedButton(
               child: (Text('my chart')),
+              onPressed: () {
+                Navigator.pushNamed(context, '/sample');
+              },
             ),
           ],
         ),
