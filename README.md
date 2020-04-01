@@ -1,16 +1,12 @@
 # charts_unergia
 
-A new Flutter application.
+Flutter app implementing Charts from libraries like 'fl_chart' and 'flutter_chart' while retrieving data from firestore backend
+
+![dd5b9d38-1510-468f-95fb-17c180e893f1](https://user-images.githubusercontent.com/46458859/78180783-e7188080-7480-11ea-8aab-c9d7703041ab.jpeg)
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+A few resources to get you started if this is your first Flutter project: youtube (https://www.youtube.com/watch?v=HGkbPrTSndM)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+For any queries email htibrewal7081@gmail.com
