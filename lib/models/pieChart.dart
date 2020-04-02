@@ -1,12 +1,18 @@
-class PieChart {
+class ManHours {
   final String value;
+  final String name;
+  final String color;
 
-  PieChart(this.value);
+  ManHours(this.name, this.value, this.color);
 
-  PieChart.fromMap(Map<String, dynamic> map)
+  ManHours.from(Map<String, dynamic> map)
       : assert(map['value'] != null),
-        value = map['value'];
+        assert(map['name'] != null),
+        assert(map['color'] != null),
+        value = map['value'],
+        name = map['name'],
+        color = map['color'];
 
   @override
-  String toString() => "Record<$value>";
+  String toString() => "Records<$name, $value, $color>";
 }

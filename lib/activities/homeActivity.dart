@@ -27,6 +27,12 @@ class _HomeActivityState extends State<HomeActivity> {
                 Navigator.pushNamed(context, '/sample');
               },
             ),
+            RaisedButton(
+              child: Text('Man Hours'),
+              onPressed: () {
+                Navigator.pushNamed(context, '/manHours');
+              },
+            ),
           ],
         ),
       ),
