@@ -12,18 +12,25 @@ class PieChartActivity extends StatefulWidget {
 class _PieChartActivityState extends State<PieChartActivity> {
   List<charts.PieChartSectionData> _pieChartdata = [];
   List<ManHours> recievedData = [];
+  int touchedIndex;
 
   _generatePieChartSectionData(recievedData) {
     print(recievedData);
-    int len = recievedData.length();
+    int len = recievedData.length;
+    _pieChartdata.clear();
     for (int i = 0; i < len; i++) {
+      final isTouched = i == touchedIndex;
+      final double fontSize = isTouched ? 25 : 16;
+      final double radius = isTouched ? 90 : 60;
       _pieChartdata.add(charts.PieChartSectionData(
-        //value: recievedData[i].value,
-        // color: Color(0xffccddd),
-
-        title: recievedData[i].name,
-        value: double.parse(recievedData[i].value),
-      ));
+          color: Color(int.parse(recievedData[i].color)),
+          title: recievedData[i].value + '%',
+          value: double.parse(recievedData[i].value),
+          radius: radius,
+          titleStyle: TextStyle(
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: Colors.white)));
     }
   }
 
@@ -31,7 +38,49 @@ class _PieChartActivityState extends State<PieChartActivity> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: _bodyBuild(context),
+        backgroundColor: Color(0xff141d26),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              child: Center(
+                  child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                    style:
+                        TextStyle(fontStyle: FontStyle.normal, fontSize: 20.0),
+                    children: <TextSpan>[
+                      TextSpan(text: 'This is a '),
+                      TextSpan(
+                          text: 'Donut Chart',
+                          style: TextStyle(
+                              color: Color(0xfff30a49),
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold)),
+                      TextSpan(text: ' representing the '),
+                      TextSpan(
+                          text: 'Manhours',
+                          style: TextStyle(
+                              color: Color(0xfff30a49),
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text:
+                              ' spent during a project in an organization.\n\n'),
+                      TextSpan(
+                          text:
+                              'For instance, 10% of design means that 10% of all the time spent by everyone involved in the project was spent in the design process.',
+                          style: TextStyle(fontSize: 14.0))
+                    ]),
+              )),
+            ),
+            _bodyBuild(context),
+            Container(
+              child: _buildIndex(context),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -53,6 +102,7 @@ class _PieChartActivityState extends State<PieChartActivity> {
   }
 
   Widget _buildPie(BuildContext context, List<ManHours> man) {
+    recievedData.clear();
     recievedData = man;
     print('ghfghfghfhgfghfhgfhfghfghfgfhfh');
     print(recievedData.toString());
@@ -62,8 +112,107 @@ class _PieChartActivityState extends State<PieChartActivity> {
       child: charts.PieChart(charts.PieChartData(
         sections: _pieChartdata,
         sectionsSpace: 5.0,
-        centerSpaceRadius: 40.0,
+        centerSpaceRadius: 50.0,
+        borderData: charts.FlBorderData(show: false),
+        pieTouchData: charts.PieTouchData(touchCallback: (pieTouchResponse) {
+          setState(() {
+            if (pieTouchResponse.touchInput is charts.FlLongPressEnd ||
+                pieTouchResponse.touchInput is charts.FlPanEnd) {
+              touchedIndex = -1;
+            } else {
+              touchedIndex = pieTouchResponse.touchedSectionIndex;
+            }
+          });
+        }),
       )),
+    );
+  }
+
+  Widget _buildIndex(context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: 12.0,
+              width: MediaQuery.of(context).size.width / 2,
+              color: Colors.red,
+            ),
+            SizedBox(
+              width: 20.0,
+            ),
+            Text('Marketing', style: TextStyle(color: Colors.white))
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: 12.0,
+              width: MediaQuery.of(context).size.width / 2,
+              color: Colors.red,
+            ),
+            SizedBox(
+              width: 20.0,
+            ),
+            Text('Marketing', style: TextStyle(color: Colors.white))
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: 12.0,
+              width: MediaQuery.of(context).size.width / 2,
+              color: Colors.red,
+            ),
+            SizedBox(
+              width: 20.0,
+            ),
+            Text(
+              'Marketing',
+              style: TextStyle(color: Colors.white),
+            )
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: 12.0,
+              width: MediaQuery.of(context).size.width / 2,
+              color: Colors.red,
+            ),
+            SizedBox(
+              width: 20.0,
+            ),
+            Text(
+              'Marketing',
+              style: TextStyle(color: Colors.white),
+            )
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: 12.0,
+              width: MediaQuery.of(context).size.width / 2,
+              color: Colors.red,
+            ),
+            SizedBox(
+              width: 20.0,
+            ),
+            Text(
+              'Marketing',
+              style: TextStyle(color: Colors.white),
+            )
+          ],
+        )
+      ],
     );
   }
 }
