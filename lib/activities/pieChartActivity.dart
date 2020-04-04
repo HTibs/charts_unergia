@@ -38,6 +38,17 @@ class _PieChartActivityState extends State<PieChartActivity> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color(0xff141d26),
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.grey,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+        ),
         backgroundColor: Color(0xff141d26),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -197,6 +208,7 @@ class _PieChartActivityState extends State<PieChartActivity> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
               height: 12.0,
