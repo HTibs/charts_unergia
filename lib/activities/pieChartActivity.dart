@@ -22,6 +22,7 @@ class _PieChartActivityState extends State<PieChartActivity> {
       final isTouched = i == touchedIndex;
       final double fontSize = isTouched ? 25 : 16;
       final double radius = isTouched ? 90 : 60;
+      //_buildIndex(context);
       _pieChartdata.add(charts.PieChartSectionData(
           color: Color(int.parse(recievedData[i].color)),
           title: recievedData[i].value + '%',
@@ -39,11 +40,12 @@ class _PieChartActivityState extends State<PieChartActivity> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          elevation: 0.0,
           backgroundColor: Color(0xff141d26),
           leading: IconButton(
               icon: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.grey,
+                Icons.keyboard_arrow_left,
+                color: Color(0xffff6768),
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -66,14 +68,14 @@ class _PieChartActivityState extends State<PieChartActivity> {
                       TextSpan(
                           text: 'Donut Chart',
                           style: TextStyle(
-                              color: Color(0xfff30a49),
+                              color: Color(0xffff6768),
                               fontSize: 30.0,
                               fontWeight: FontWeight.bold)),
                       TextSpan(text: ' representing the '),
                       TextSpan(
                           text: 'Manhours',
                           style: TextStyle(
-                              color: Color(0xfff30a49),
+                              color: Color(0xffff6768),
                               fontSize: 30.0,
                               fontWeight: FontWeight.bold)),
                       TextSpan(
@@ -124,7 +126,9 @@ class _PieChartActivityState extends State<PieChartActivity> {
         sections: _pieChartdata,
         sectionsSpace: 5.0,
         centerSpaceRadius: 50.0,
-        borderData: charts.FlBorderData(show: false),
+        borderData: charts.FlBorderData(
+          show: false,
+        ),
         pieTouchData: charts.PieTouchData(touchCallback: (pieTouchResponse) {
           setState(() {
             if (pieTouchResponse.touchInput is charts.FlLongPressEnd ||
@@ -150,12 +154,12 @@ class _PieChartActivityState extends State<PieChartActivity> {
             Container(
               height: 12.0,
               width: MediaQuery.of(context).size.width / 2,
-              color: Colors.red,
+              color: Color(0xff9e3d64),
             ),
             SizedBox(
-              width: 20.0,
+              width: 10.0,
             ),
-            Text('Marketing', style: TextStyle(color: Colors.white))
+            Text('Marketing', style: TextStyle(color: Color(0xff9e3d64)))
           ],
         ),
         Row(
@@ -164,12 +168,12 @@ class _PieChartActivityState extends State<PieChartActivity> {
             Container(
               height: 12.0,
               width: MediaQuery.of(context).size.width / 2,
-              color: Colors.red,
+              color: Color(0xfffe5e51),
             ),
             SizedBox(
-              width: 20.0,
+              width: 10.0,
             ),
-            Text('Marketing', style: TextStyle(color: Colors.white))
+            Text('Fabrication', style: TextStyle(color: Color(0xfffe5e51)))
           ],
         ),
         Row(
@@ -178,14 +182,14 @@ class _PieChartActivityState extends State<PieChartActivity> {
             Container(
               height: 12.0,
               width: MediaQuery.of(context).size.width / 2,
-              color: Colors.red,
+              color: Color(0xfff6db5f),
             ),
             SizedBox(
-              width: 20.0,
+              width: 10.0,
             ),
             Text(
-              'Marketing',
-              style: TextStyle(color: Colors.white),
+              'Design',
+              style: TextStyle(color: Color(0xfff6db5f)),
             )
           ],
         ),
@@ -195,14 +199,14 @@ class _PieChartActivityState extends State<PieChartActivity> {
             Container(
               height: 12.0,
               width: MediaQuery.of(context).size.width / 2,
-              color: Colors.red,
+              color: Color(0xffffb554),
             ),
             SizedBox(
-              width: 20.0,
+              width: 10.0,
             ),
             Text(
-              'Marketing',
-              style: TextStyle(color: Colors.white),
+              'Documentation',
+              style: TextStyle(color: Color(0xffffb554)),
             )
           ],
         ),
@@ -213,17 +217,34 @@ class _PieChartActivityState extends State<PieChartActivity> {
             Container(
               height: 12.0,
               width: MediaQuery.of(context).size.width / 2,
-              color: Colors.red,
+              color: Color(0xff36abb5),
             ),
             SizedBox(
-              width: 20.0,
+              width: 10.0,
             ),
             Text(
-              'Marketing',
-              style: TextStyle(color: Colors.white),
+              'Research',
+              style: TextStyle(color: Color(0xff36abb5)),
             )
           ],
-        )
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: 12.0,
+              width: MediaQuery.of(context).size.width / 2,
+              color: Color(0xff02eeff),
+            ),
+            SizedBox(
+              width: 10.0,
+            ),
+            Text(
+              'Tests',
+              style: TextStyle(color: Color(0xff02eeff)),
+            )
+          ],
+        ),
       ],
     );
   }

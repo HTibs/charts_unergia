@@ -4,11 +4,12 @@ import '../activities/SalesHomeActivity.dart';
 import '../activities/homeActivity.dart';
 import '../activities/sampl.dart';
 import '../activities/pieChartActivity.dart';
+import '../activities/newHome.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
-      return MaterialPageRoute(builder: (context) => HomeActivity());
+      return MaterialPageRoute(builder: (context) => NewHome());
     case '/salesHome':
       return MaterialPageRoute(builder: (context) => SalesHomeActivity());
     case '/sample':
@@ -22,7 +23,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
               PieChartActivity(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             animation =
-                CurvedAnimation(parent: animation, curve: Curves.bounceInOut);
+                CurvedAnimation(parent: animation, curve: Curves.linear);
             return ScaleTransition(
               alignment: Alignment.center,
               scale: animation,

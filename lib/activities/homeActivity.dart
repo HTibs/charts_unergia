@@ -1,46 +1,29 @@
 import 'package:flutter/material.dart';
 
+import 'package:slide_to_confirm/slide_to_confirm.dart';
+
 class HomeActivity extends StatefulWidget {
   @override
   _HomeActivityState createState() => _HomeActivityState();
 }
 
-//class _HomeActivityState extends State<HomeActivity> {
-//  @override
-//  Widget build(BuildContext context) {
-//    return SafeArea(
-//      child: Scaffold(
-//        backgroundColor: Color(0xffF1F1F2),
-//        body: Container(
-//          child: Column(
-//            children: <Widget>[
-//              RaisedButton(
-//                child: Text('Sales Bar Chart'),
-//                onPressed: () {
-//                  Navigator.pushNamed(context, '/salesHome');
-//                },
-//              ),
-//              RaisedButton(
-//                child: (Text('my chart')),
-//                onPressed: () {
-//                  Navigator.pushNamed(context, '/sample');
-//                },
-//              ),
-//              RaisedButton(
-//                child: Text('Man Hours'),
-//                onPressed: () {
-//                  Navigator.pushNamed(context, '/transit');
-//                },
-//              ),
-//            ],
-//          ),
-//        ),
-//      ),
-//    );
-//  }
-//}
+class _HomeActivityState extends State<HomeActivity>
+    with SingleTickerProviderStateMixin {
+  AnimationController _animationController;
+  Animation _animation;
 
-class _HomeActivityState extends State<HomeActivity> {
+  @override
+  void initState() {
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    _animationController.repeat(reverse: true);
+    _animation = Tween(begin: 2.0, end: 15.0).animate(_animationController)
+      ..addListener(() {
+        setState(() {});
+      });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -62,11 +45,36 @@ class _HomeActivityState extends State<HomeActivity> {
                       )
                     ],
                     borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10.0),
-                        bottomRight: Radius.circular(10.0))),
+                        bottomLeft: Radius.circular(20.0),
+                        bottomRight: Radius.circular(20.0))),
                 width: MediaQuery.of(context).size.width,
                 height: (MediaQuery.of(context).size.height / 2) - 50,
-                //color: Colors.red,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: 50.0,
+                      height: 50.0,
+                      child: IconButton(
+                        icon: Icon(Icons.insert_chart),
+                        color: Colors.red,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/salesHome');
+                        },
+                      ),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.green,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.blueGrey,
+                              blurRadius: _animationController.value,
+                              spreadRadius: _animation.value)
+                        ],
+                      ),
+                    ),
+                    Image.asset('assets/images/bar.png')
+                  ],
+                ),
               ),
             ),
             Positioned(
@@ -78,32 +86,45 @@ class _HomeActivityState extends State<HomeActivity> {
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: Color(0xff141d26),
-                        blurRadius: 2.0,
-                        spreadRadius: 2.0,
-                      )
-                    ],
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10.0),
-                        topRight: Radius.circular(10.0)),
-                    color: Color(0xff141d26)),
-              ),
-            ),
-            Center(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.yellow,
-                    boxShadow: [
-                      BoxShadow(
                         color: Colors.grey,
                         blurRadius: 2.0,
                         spreadRadius: 2.0,
                       )
                     ],
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                //color: Colors.yellow,
-                width: MediaQuery.of(context).size.width - 100,
-                height: 100.0,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0)),
+                    color: Color(0xff141d26)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Center(
+                      child: Text(
+                        'Donut Chart',
+                        style: TextStyle(fontSize: 60.0, color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50.0,
+                    ),
+                    ConfirmationSlider(
+                        height: 50.0,
+                        width: 350.0,
+                        backgroundColor: Colors.white,
+                        iconColor: Colors.red,
+                        text: 'Slide to the chart',
+                        shadow: BoxShadow(
+                            color: Colors.grey,
+                            spreadRadius: 1.0,
+                            blurRadius: 1.0),
+                        onConfirmation: () {
+                          Navigator.pushNamed(context, '/transit');
+                        }),
+                    SizedBox(
+                      height: 20.0,
+                    )
+                  ],
+                ),
               ),
             ),
           ],

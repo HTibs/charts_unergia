@@ -28,9 +28,23 @@ class _SalesHomeActivityState extends State<SalesHomeActivity> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('sales bar graph')),
-      body: _bodyBuild(context),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color(0xffF1F1F2),
+        appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(
+                Icons.keyboard_arrow_left,
+                color: Color(0xffEB4559),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+          backgroundColor: Color(0xffF1F1F2),
+          elevation: 0.0,
+        ),
+        body: _bodyBuild(context),
+      ),
     );
   }
 
